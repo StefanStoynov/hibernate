@@ -28,6 +28,7 @@ public class HibernateApplication implements CommandLineRunner {
 
         repository.deleteById(10001L);
 
+        repository.save(new Course("new course created"));
 
     }
 }

@@ -23,6 +23,18 @@ public class CourseRepository {
         return em.find(Course.class, id);
     }
 
+    public Course save(Course course){
+        //check if it is insert or update method
+        if (course.getId() == null){
+            //insert
+            em.persist(course);
+        }else{
+            //update
+            em.merge(course);
+        }
+        return course;
+    }
+
     public void deleteById(Long id) {
         Course course = findById(id);
         em.remove(course);

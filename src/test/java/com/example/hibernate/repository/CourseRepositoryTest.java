@@ -14,16 +14,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(classes = HibernateApplication.class)
 class CourseRepositoryTest {
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
-
     @Autowired
     CourseRepository repository;
 
-
     @Test
     void findById() {
-        Course course = repository.findById(10001L);
-        assertEquals("hibernate", course.getName());
+        Course course = repository.findById(10002L);
+        assertEquals("JPA", course.getName());
     }
 
     @Test

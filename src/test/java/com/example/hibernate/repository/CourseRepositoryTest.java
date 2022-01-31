@@ -33,4 +33,16 @@ class CourseRepositoryTest {
         repository.deleteById(10002L);
         assertNull(repository.findById(10002L));
     }
+
+    @Test
+    @DirtiesContext
+    //@DirtiesContext is used to repair the data after the test is done
+    void update() {
+        Course course = repository.findById(10002L);
+        assertEquals("JPA", course.getName());
+        course.setName("updated name");
+        repository.save(course);
+        Course course1 = repository.findById(10002L);
+        assertEquals("updated name", course1.getName());
+    }
 }

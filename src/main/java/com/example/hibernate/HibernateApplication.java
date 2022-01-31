@@ -26,5 +26,8 @@ public class HibernateApplication implements CommandLineRunner {
         Course course = repository.findById(10001L);
         logger.info("Course 10001 {}", course);
 
+        repository.deleteById(10001L);
+
+
     }
 }

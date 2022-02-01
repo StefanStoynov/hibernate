@@ -31,3 +31,9 @@ for more examples see JPQLTest.java
 
 @UpdateTimestamp
 @CreationTimestamp
+
+#Native Queries
+see NativeQueryTest.java
+
+#Named Queries
+see JPQLTest.java and Course.java

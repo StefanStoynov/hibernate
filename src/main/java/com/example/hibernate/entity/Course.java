@@ -1,12 +1,18 @@
 package com.example.hibernate.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jdk.jfr.Name;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name ="course")
+//for a SINGLE named query
+//@NamedQuery(name = "query_get_all_courses", query = "Select c From Course c")
+//for MULTIPLE named queries
+@NamedQueries(value = {
+        @NamedQuery(name = "query_get_all_courses", query = "Select c From Course c"),
+        @NamedQuery(name = "query_get_courses_where", query = "Select c From Course c Where name like '%100 steps%'")
+})
 public class Course {
     @Id
     @GeneratedValue

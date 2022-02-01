@@ -3,13 +3,12 @@ package com.example.hibernate.repository;
 import com.example.hibernate.HibernateApplication;
 import com.example.hibernate.entity.Course;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest(classes = HibernateApplication.class)
 class CourseRepositoryTest {
@@ -41,5 +40,10 @@ class CourseRepositoryTest {
         repository.save(course);
         Course course1 = repository.findById(10002L);
         assertEquals("updated name", course1.getName());
+    }
+
+    @Test
+    void playWithEntityManager() {
+        repository.playWithEntityManager();
     }
 }

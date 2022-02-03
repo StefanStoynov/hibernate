@@ -37,3 +37,6 @@ see NativeQueryTest.java
 
 #Named Queries
 see JPQLTest.java and Course.java
+
+#OneToOne relationship
+Student and Passport

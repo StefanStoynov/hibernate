@@ -29,8 +29,16 @@ public class Student {
         return name;
     }
 
+    public Passport getPassport() {
+        return passport;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setPassport(Passport passport) {
+        this.passport = passport;
     }
 
     @Override

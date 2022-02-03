@@ -2,6 +2,7 @@ package com.example.hibernate;
 
 import com.example.hibernate.entity.Course;
 import com.example.hibernate.repository.CourseRepository;
+import com.example.hibernate.repository.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class HibernateApplication implements CommandLineRunner {
     @Autowired
     private CourseRepository repository;
 
+    @Autowired
+    private StudentRepository studentRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(HibernateApplication.class, args);
     }
@@ -30,7 +34,9 @@ public class HibernateApplication implements CommandLineRunner {
 //
 //        repository.save(new Course("new course created"));
 
-        repository.playWithEntityManager();
+  //      repository.playWithEntityManager();
+        studentRepository.saveStudentWithPassport();
+
 
     }
 }

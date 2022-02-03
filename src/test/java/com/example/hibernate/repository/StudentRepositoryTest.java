@@ -1,6 +1,7 @@
 package com.example.hibernate.repository;
 
 import com.example.hibernate.HibernateApplication;
+import com.example.hibernate.entity.Passport;
 import com.example.hibernate.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -21,6 +22,32 @@ class StudentRepositoryTest {
 
     @Autowired
     EntityManager entityManager;
+
+    @Test
+    //@Transactional creates a Persistence Context where all objects are stored
+    //@Transactional all transactions succeed or zero
+    @Transactional
+    void playTest() {
+        //Database Operation 1 - Retrieve student
+        Student student = entityManager.find(Student.class, 20002L);
+        //Persistence Context (student)
+
+        //Database Operation 2 - Retrieve passport
+        Passport passport = student.getPassport();
+        //Persistence Context (student, passport)
+
+        //Database Operation 3 - Update passport
+        passport.setNumber("N122223");
+        //Persistence Context (student, passport++)
+
+        //Database Operation 4 - Update student
+        student.setName("Peter Updated");
+        //Persistence Context (student++, passport++)
+
+        logger.info("Student -> {}", student);
+        logger.info("Student passport -> {}", student.getPassport());
+    }
+
 
     @Test
     //@Transactional is needed because lazy fetch of passport

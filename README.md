@@ -32,6 +32,13 @@ for more examples see JPQLTest.java
 @UpdateTimestamp
 @CreationTimestamp
 
+@Transactional - when we have this annotation if we have more than one transaction in single method it will 
+execute all of them, or it will not execute eny of them. Context is open in the beginning of the method, and it is 
+closed at the end of the method. If we don't have @Transactional context is open and after transaction is passed context
+is closed. If we have OneToOne relation with lazy fetch if we do not have @Transactional we can not access
+the related object. Entity Manager is used to talk with Persistence Context. Entity manager is interface of Persistence
+context.
+
 #Native Queries
 see NativeQueryTest.java
 
@@ -40,3 +47,4 @@ see JPQLTest.java and Course.java
 
 #OneToOne relationship
 Student and Passport
+

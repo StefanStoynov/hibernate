@@ -46,5 +46,16 @@ see NativeQueryTest.java
 see JPQLTest.java and Course.java
 
 #OneToOne relationship
-Student and Passport
+Student and Passport. If we have this annotation in only one of the classes -> we have unidirectional relationship
+If we want Bi directional relationship:
 
+in the owning side annotation is like:
+Student class
+@OneToOne(fetch = FetchType.LAZY)
+private Passport passport;
+
+in the not owning side annotation is like:
+Passport class
+mapped by is related to the field passport into Student class.
+@OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
+private Student student;

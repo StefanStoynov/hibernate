@@ -57,4 +57,13 @@ class StudentRepositoryTest {
         logger.info("Student -> {}", student);
         logger.info("Student passport -> {}", student.getPassport());
     }
+
+    @Test
+    //@Transactional is needed because lazy fetch of passport
+    @Transactional
+    void retrievePassportAndAssociateItWithStudent() {
+        Passport passport = entityManager.find(Passport.class, 30001L);
+        logger.info("Passport -> {}", passport);
+        logger.info("Student associated with the passport -> {}", passport.getStudent());
+    }
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 @SpringBootTest(classes = HibernateApplication.class)
 class StudentRepositoryTest {
@@ -22,6 +23,8 @@ class StudentRepositoryTest {
     EntityManager entityManager;
 
     @Test
+    //@Transactional is needed because lazy fetch of passport
+    @Transactional
     void saveStudentWithPassport() {
         Student student = entityManager.find(Student.class, 20002L);
         logger.info("Student -> {}", student);

@@ -10,8 +10,8 @@ public class Student {
 
     @Column(nullable = false)
     private String name;
-
-    @OneToOne
+    //retrieves only student without passport join
+    @OneToOne(fetch = FetchType.LAZY)
     private Passport passport;
 
     public Student() {

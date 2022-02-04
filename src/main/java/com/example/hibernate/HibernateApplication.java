@@ -16,7 +16,7 @@ public class HibernateApplication implements CommandLineRunner {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private CourseRepository repository;
+    private CourseRepository courseRepository;
 
     @Autowired
     private StudentRepository studentRepository;
@@ -30,12 +30,14 @@ public class HibernateApplication implements CommandLineRunner {
 //        Course course = repository.findById(10001L);
 //        logger.info("Course 10001 {}", course);
 //
-//        repository.deleteById(10001L);
+//        courseRepository.deleteById(10001L);
 //
-//        repository.save(new Course("new course created"));
+//        courseRepository.save(new Course("new course created"));
 
-  //      repository.playWithEntityManager();
-        studentRepository.saveStudentWithPassport();
+  //      courseRepository.playWithEntityManager();
+      //  studentRepository.saveStudentWithPassport();
+
+        courseRepository.addReviewsForCourse();
 
 
     }

@@ -1,6 +1,7 @@
 package com.example.hibernate.repository;
 
 import com.example.hibernate.entity.Course;
+import com.example.hibernate.entity.Review;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,4 +68,26 @@ public class CourseRepository {
     }
 
 
+    public void addReviewsForCourse() {
+        //get the course 10003
+        Course course = findById(10003L);
+        logger.info("course.getReviews() -> {}", course.getReviews());
+
+        //add 2 reviews to it
+        Review review1 = new Review("5", "Great Stuff");
+        Review review2 = new Review("5", "Hatsoff");
+
+        //setting the relationship
+        //save the Review into Course
+        course.addReview(review1);
+        //save the Course into Review
+        review1.setCourse(course);
+
+        course.addReview(review2);
+        review2.setCourse(course);
+
+        //save newly created reviews to db, course is already there
+        em.persist(review1);
+        em.persist(review2);
+    }
 }

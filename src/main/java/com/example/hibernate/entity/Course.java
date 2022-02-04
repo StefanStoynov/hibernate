@@ -1,8 +1,9 @@
 package com.example.hibernate.entity;
 
-import jdk.jfr.Name;
-
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
 @Table(name ="course")
@@ -20,6 +21,9 @@ public class Course {
 
     private String name;
 
+    @OneToMany(mappedBy = "course")
+    private List<Review> reviews = new ArrayList<>();
+
     //access modifier is important
     protected Course() {
     }
@@ -34,6 +38,18 @@ public class Course {
 
     public String getName() {
         return name;
+    }
+
+    public List<Review> getReviews() {
+        return Collections.unmodifiableList(reviews);
+    }
+
+    public void addReview(Review review) {
+        this.reviews.add(review);
+    }
+
+    public void removeReview(Review review) {
+        this.reviews.remove(review);
     }
 
     public void setName(String name) {

@@ -60,3 +60,7 @@ Passport class
 mapped by is related to the field passport into Student class.
 @OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
 private Student student;
+
+#ManyToOne
+Course and Review
+The relationship must be to the One side.

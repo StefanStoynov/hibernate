@@ -63,4 +63,8 @@ private Student student;
 
 #ManyToOne
 Course and Review
-The relationship must be to the One side.
+The relationship must be to the One side (in this example Course.java).
+  - on the side of ManyToOne is eager fetching
+  - on the side of OneToMany is lazy fetching
+when is ending to ToOne is always eager fetching
+when is ending to ToMany is lazy fetching

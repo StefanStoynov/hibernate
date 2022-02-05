@@ -1,6 +1,7 @@
 package com.example.hibernate.repository;
 
 import com.example.hibernate.HibernateApplication;
+import com.example.hibernate.entity.Course;
 import com.example.hibernate.entity.Passport;
 import com.example.hibernate.entity.Student;
 import org.junit.jupiter.api.Test;
@@ -65,5 +66,21 @@ class StudentRepositoryTest {
         Passport passport = entityManager.find(Passport.class, 30001L);
         logger.info("Passport -> {}", passport);
         logger.info("Student associated with the passport -> {}", passport.getStudent());
+    }
+
+    @Test
+    @Transactional
+    void retrieveStudentAndCourses() {
+        Student student = entityManager.find(Student.class, 20001L);
+        logger.info("Student -> {}", student);
+        logger.info("Student is associated with the following courses -> {}", student.getCourses());
+    }
+
+    @Test
+    @Transactional
+    void retrieveCourseAndStudents() {
+        Course course = entityManager.find(Course.class, 10001L);
+        logger.info("Course -> {}", course);
+        logger.info("This Course have following students enrolled -> {}", course.getStudents());
     }
 }

@@ -1,5 +1,6 @@
 package com.example.hibernate.repository;
 
+import com.example.hibernate.entity.Course;
 import com.example.hibernate.entity.Passport;
 import com.example.hibernate.entity.Student;
 import org.slf4j.Logger;
@@ -53,6 +54,27 @@ public class StudentRepository {
         student.setPassport(passport);
         em.persist(student);
     }
+
+    public void insertStudentAndCourseHardcoded(){
+        Student student = new Student("Stamatik");
+        Course course = new Course("Course of Stamatik");
+        em.persist(student);
+        em.persist(course);
+
+        student.addCourse(course);
+        course.addStudent(student);
+        em.persist(student);
+    }
+
+    public void insertStudentAndCourse(Student student, Course course){
+        student.addCourse(course);
+        course.addStudent(student);
+
+        em.persist(student);
+        em.persist(course);
+    }
+
+
 
 
 }

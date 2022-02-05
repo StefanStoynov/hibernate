@@ -2,6 +2,7 @@ package com.example.hibernate;
 
 import com.example.hibernate.entity.Course;
 import com.example.hibernate.entity.Review;
+import com.example.hibernate.entity.Student;
 import com.example.hibernate.repository.CourseRepository;
 import com.example.hibernate.repository.StudentRepository;
 import org.slf4j.Logger;
@@ -42,11 +43,15 @@ public class HibernateApplication implements CommandLineRunner {
 //        studentRepository.saveStudentWithPassport();
 //
 //        courseRepository.addHardcodedReviewsForCourse();
-        List<Review> reviews = new ArrayList<>();
-        reviews.add(new Review("5", "Great Stuff"));
-        reviews.add(new Review("5", "Hatsoff"));
-
-        courseRepository.addReviewsForCourse(10003L,reviews);
+//        List<Review> reviews = new ArrayList<>();
+//        reviews.add(new Review("5", "Great Stuff"));
+//        reviews.add(new Review("5", "Hatsoff"));
+//
+//        courseRepository.addReviewsForCourse(10003L,reviews);
+//        studentRepository.insertStudentAndCourseHardcoded();
+        Student student = new Student("Stamatik");
+        Course course = new Course("Course of Stamatik");
+        studentRepository.insertStudentAndCourse(student,course);
 
 
     }

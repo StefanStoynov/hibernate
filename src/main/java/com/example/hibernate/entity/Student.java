@@ -1,6 +1,9 @@
 package com.example.hibernate.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Entity
 public class Student {
@@ -13,6 +16,13 @@ public class Student {
     //retrieves only student without passport join
     @OneToOne(fetch = FetchType.LAZY)
     private Passport passport;
+
+    @ManyToMany
+    @JoinTable(name = "STUDENT_COURSE",
+               joinColumns = @JoinColumn(name = "STUDENT_ID"),
+               inverseJoinColumns = @JoinColumn(name = "COURSE_ID")
+              )
+    private List<Course> courses = new ArrayList<>();
 
     public Student() {
     }
@@ -31,6 +41,18 @@ public class Student {
 
     public Passport getPassport() {
         return passport;
+    }
+
+    public List<Course> getCourses() {
+        return Collections.unmodifiableList(courses);
+    }
+
+    public void addCourse(Course course) {
+        this.courses.add(course);
+    }
+
+    public void deleteCourse(Course course) {
+        this.courses.remove(course);
     }
 
     public void setName(String name) {

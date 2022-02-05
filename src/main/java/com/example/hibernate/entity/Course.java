@@ -24,6 +24,9 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<Review> reviews = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students = new ArrayList<>();
+
     //access modifier is important
     protected Course() {
     }
@@ -42,6 +45,18 @@ public class Course {
 
     public List<Review> getReviews() {
         return Collections.unmodifiableList(reviews);
+    }
+
+    public List<Student> getStudents() {
+        return Collections.unmodifiableList(students);
+    }
+
+    public void addStudent(Student student) {
+        this.students.add(student);
+    }
+
+    public void removeStudent(Student student) {
+        this.students.remove(student);
     }
 
     public void addReview(Review review) {

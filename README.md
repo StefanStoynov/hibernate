@@ -51,20 +51,56 @@ Student and Passport. If we have this annotation in only one of the classes -> w
 If we want Bi directional relationship:
 
 in the owning side annotation is like:
-Student class
+
+Student owning side
+
 @OneToOne(fetch = FetchType.LAZY)
 private Passport passport;
 
 in the not owning side annotation is like:
-Passport class
+
+Passport 
+
 mapped by is related to the field passport into Student class.
 @OneToOne(fetch = FetchType.LAZY, mappedBy = "passport")
 private Student student;
 
 #ManyToOne
 Course and Review
+
+Course
+
+@OneToMany(mappedBy = "course")
+private List<Review> reviews = new ArrayList<>();
+One Course can have Many Reviews.
+
+Review owning side
+
+@ManyToOne
+private Course course;
+Many reviews can be for One Course
+
 The relationship must be to the One side (in this example Course.java).
   - on the side of ManyToOne is eager fetching
   - on the side of OneToMany is lazy fetching
-when is ending to ToOne is always eager fetching
-when is ending to ToMany is lazy fetching
+*when is ending to ToOne is always eager fetching*
+*when is ending to ToMany is lazy fetching*
+
+#ManyToMany
+Course and Student
+Course
+
+    @ManyToMany(mappedBy = "courses")
+    private List<Student> students = new ArrayList<>();
+
+Student owning side
+
+    @ManyToMany
+    @JoinTable(name = "STUDENT_COURSE",
+               joinColumns = @JoinColumn(name = "STUDENT_ID"),
+               inverseJoinColumns = @JoinColumn(name = "COURSE_ID")
+              )         
+    private List<Course> courses = new ArrayList<>();
+
+In ManyToMany relationship it does not matter witch side is the owning side.
+

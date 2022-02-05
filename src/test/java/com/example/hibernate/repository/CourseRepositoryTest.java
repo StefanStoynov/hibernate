@@ -62,13 +62,15 @@ class CourseRepositoryTest {
 
     @Test
     @Transactional
+    //lazy fetching
     void retrieveReviewsForCourse() {
         Course course = repository.findById(10001L);
         logger.info("{}", course.getReviews());
     }
 
     @Test
-    @Transactional
+    //@Transactional - we do not need @Transactional because we have eager fetch, and we have Course object into persistent context
+    //eager fetching
     void retrieveCourseForReviews() {
         Review review = entityManager.find(Review.class,40001L);
         logger.info("This review is for course {}", review.getCourse().getName());

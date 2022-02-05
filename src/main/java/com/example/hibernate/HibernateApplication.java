@@ -1,6 +1,7 @@
 package com.example.hibernate;
 
 import com.example.hibernate.entity.Course;
+import com.example.hibernate.entity.Review;
 import com.example.hibernate.repository.CourseRepository;
 import com.example.hibernate.repository.StudentRepository;
 import org.slf4j.Logger;
@@ -9,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootApplication
 public class HibernateApplication implements CommandLineRunner {
@@ -27,17 +31,22 @@ public class HibernateApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        Course course = repository.findById(10001L);
+//        Course course = courseRepository.findById(10001L);
 //        logger.info("Course 10001 {}", course);
 //
 //        courseRepository.deleteById(10001L);
 //
 //        courseRepository.save(new Course("new course created"));
+//
+//        courseRepository.playWithEntityManager();
+//        studentRepository.saveStudentWithPassport();
+//
+//        courseRepository.addHardcodedReviewsForCourse();
+        List<Review> reviews = new ArrayList<>();
+        reviews.add(new Review("5", "Great Stuff"));
+        reviews.add(new Review("5", "Hatsoff"));
 
-  //      courseRepository.playWithEntityManager();
-      //  studentRepository.saveStudentWithPassport();
-
-        courseRepository.addReviewsForCourse();
+        courseRepository.addReviewsForCourse(10003L,reviews);
 
 
     }

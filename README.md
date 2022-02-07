@@ -120,3 +120,7 @@ PartTimeEmployee	2	Gergan	null	    50.00
 One additional column is created automatically - DTYPE. Stores the type of the record.
 If we want to be specific we can use this annotation on class (DTYPE == EmployeeType):
 @DiscriminatorColumn(name = "EmployeeType")
+
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) - Creates a table for every child class. No nullable columns 
+created, but the performance is decreasing if we want to take all records for both tables(UNION must be used for allEmployees)
+Common columns are repeated.

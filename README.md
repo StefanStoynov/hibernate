@@ -132,3 +132,21 @@ PartTimeEmployee - will have a table -> columns: ID, HOURLY_WAGE
 FullTimeEmployee - will have a table -> columns: ID, SALARY
 ID - is a match with all the tables, this column is used for join
 Very complex query is used to retrieve all Employees (3 tables are joined)
+
+@MappedSuperclass - when we use this annotation we can NOT use @Entity annotation in the same class. Mappings are done
+for all subclasses, and no table is created for superclass. Completely eliminates inheritance relationship. 
+Because Employee will be no more an Entity we have to create following methods into EmployeeRepository in order to 
+retrieve all employees.
+
+    public List<PartTimeEmployee> retrieveAllPartTimeEmployees(){
+        return this.em.createQuery("select pe from PartTimeEmployee pe", PartTimeEmployee.class).getResultList();
+    }
+
+    public List<FullTimeEmployee> retrieveAllFullTimeEmployees(){
+        return this.em.createQuery("select fe from FullTimeEmployee fe", FullTimeEmployee.class).getResultList();
+    }
+
+Then we have to call them from HibernateApplication one after another.
+Employee - no table created
+A separate table will be created for PartTimeEmployee -> columns: ID, NAME, HOURLY_WAGE
+A separate table will be created for FullTimeEmployee -> columns: ID, NAME, SALARY

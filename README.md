@@ -104,3 +104,19 @@ Student owning side
 
 In ManyToMany relationship it does not matter witch side is the owning side.
 
+#Inheritance
+
+Employee.java
+
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) - this annotation is used usually at class that will be extended,
+and is used for telling Spring that we want all classes extending this abstract/normal class to be stored into a single
+DB table. SINGLE_TABLE is default strategy. The problem with this strategy is that we have a lot of nullable columns.
+The advantage is the performance -> all data is taken from a single table, no need for a joins. 
+
+DTYPE	            ID	NAME	SALARY	    HOURLY_WAGE
+FullTimeEmployee	1	Gergan	10000.00	null
+PartTimeEmployee	2	Gergan	null	    50.00
+
+One additional column is created automatically - DTYPE. Stores the type of the record.
+If we want to be specific we can use this annotation on class (DTYPE == EmployeeType):
+@DiscriminatorColumn(name = "EmployeeType")

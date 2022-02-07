@@ -57,7 +57,7 @@ public class HibernateApplication implements CommandLineRunner {
 //        studentRepository.insertStudentAndCourse(student,course);
 
         Employee fullTimeEmployee = new FullTimeEmployee("Gergan", BigDecimal.valueOf(10000L));
-        Employee partTimeEmployee = new PartTimeEmployee("Gergan", BigDecimal.valueOf(50L));
+        Employee partTimeEmployee = new PartTimeEmployee("Grozdan", BigDecimal.valueOf(50L));
         employeeRepository.insert(fullTimeEmployee);
         employeeRepository.insert(partTimeEmployee);
 

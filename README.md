@@ -120,6 +120,7 @@ PartTimeEmployee	2	Gergan	null	    50.00
 One additional column is created automatically - DTYPE. Stores the type of the record.
 If we want to be specific we can use this annotation on class (DTYPE == EmployeeType):
 @DiscriminatorColumn(name = "EmployeeType")
+BEST FOR PERFORMANCE
 
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) - Creates a table for every child class. No nullable columns 
 created, but the performance is decreasing if we want to take all records for both tables(UNION must be used for allEmployees)
@@ -132,6 +133,7 @@ PartTimeEmployee - will have a table -> columns: ID, HOURLY_WAGE
 FullTimeEmployee - will have a table -> columns: ID, SALARY
 ID - is a match with all the tables, this column is used for join
 Very complex query is used to retrieve all Employees (3 tables are joined)
+BEST FOR DATA -> NO NULLABLE, NO DUPLICATION, NO CHANCE FOR BAD DATA.
 
 @MappedSuperclass - when we use this annotation we can NOT use @Entity annotation in the same class. Mappings are done
 for all subclasses, and no table is created for superclass. Completely eliminates inheritance relationship. 

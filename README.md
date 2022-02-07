@@ -124,3 +124,11 @@ If we want to be specific we can use this annotation on class (DTYPE == Employee
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) - Creates a table for every child class. No nullable columns 
 created, but the performance is decreasing if we want to take all records for both tables(UNION must be used for allEmployees)
 Common columns are repeated.
+
+@Inheritance(strategy = InheritanceType.JOINED) - In this strategy if we have a specific fields they will be mapped to 
+a separate table then the fields that are common to the parent class. Join will be performed to instantiate the subclass
+Employee - will have a table -> columns: ID, NAME
+PartTimeEmployee - will have a table -> columns: ID, HOURLY_WAGE
+FullTimeEmployee - will have a table -> columns: ID, SALARY
+ID - is a match with all the tables, this column is used for join
+Very complex query is used to retrieve all Employees (3 tables are joined)

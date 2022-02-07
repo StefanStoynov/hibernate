@@ -2,6 +2,7 @@ package com.example.hibernate.entity;
 
 import javax.persistence.Entity;
 import java.math.BigDecimal;
+
 @Entity
 public class FullTimeEmployee extends Employee{
 

@@ -1,9 +1,8 @@
 package com.example.hibernate.entity;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 @Entity
 public abstract class Employee {
@@ -13,7 +12,6 @@ public abstract class Employee {
 
     private String name;
 
-       //access modifier is important
     protected Employee() {
     }
 

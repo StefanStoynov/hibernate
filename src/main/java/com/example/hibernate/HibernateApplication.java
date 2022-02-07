@@ -1,9 +1,8 @@
 package com.example.hibernate;
 
-import com.example.hibernate.entity.Course;
-import com.example.hibernate.entity.Review;
-import com.example.hibernate.entity.Student;
+import com.example.hibernate.entity.*;
 import com.example.hibernate.repository.CourseRepository;
+import com.example.hibernate.repository.EmployeeRepository;
 import com.example.hibernate.repository.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +25,9 @@ public class HibernateApplication implements CommandLineRunner {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(HibernateApplication.class, args);
@@ -49,10 +52,15 @@ public class HibernateApplication implements CommandLineRunner {
 //
 //        courseRepository.addReviewsForCourse(10003L,reviews);
 //        studentRepository.insertStudentAndCourseHardcoded();
-        Student student = new Student("Stamatik");
-        Course course = new Course("Course of Stamatik");
-        studentRepository.insertStudentAndCourse(student,course);
+//        Student student = new Student("Stamatik");
+//        Course course = new Course("Course of Stamatik");
+//        studentRepository.insertStudentAndCourse(student,course);
 
+        Employee fullTimeEmployee = new FullTimeEmployee("Gergan", BigDecimal.valueOf(10000L));
+        Employee partTimeEmployee = new PartTimeEmployee("Gergan", BigDecimal.valueOf(50L));
+        employeeRepository.insert(fullTimeEmployee);
+        employeeRepository.insert(partTimeEmployee);
 
+        logger.info("All employees -> {}", employeeRepository.retrieveAllEmployees());
     }
 }

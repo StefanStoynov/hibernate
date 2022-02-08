@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import java.util.List;
@@ -97,5 +98,62 @@ class JPQLTest {
     //BETWEEN 100 AND 1000
     //IS NULL
     //FOR STRINGS upper, lower, trim, length
+
+    //JOIN -> Select c, s, from Course c JOIN c students s
+    //LEFT JOIN -> Select c, s, from Course c LEFT JOIN c students s; will return courses without students as well
+    //CROSS JOIN -> Select c, s from Course c, Student s; if we have 3 Students and 4 Courses will return 12 rows
+    @Test
+    public void join(){
+        // the result contains 2 entities, so it must be a query not a typeQuery or namedQuery
+        Query query = em.createQuery("Select c, s from Course c JOIN c.students s");
+        List<Object[]> resultList = query.getResultList();
+        logger.info("Result list size  -> {}",resultList.size());
+        for (Object[] result : resultList) {
+            logger.info("Course {}, Student {}", result[0], result[1]);
+        }
+//        Result list size  -> 4
+//        Course Course{name='hibernate'}, Student Student{name='Stefan'}
+//        Course Course{name='hibernate'}, Student Student{name='Petar'}
+//        Course Course{name='hibernate'}, Student Student{name='Ivan'}
+//        Course Course{name='JDBC'}, Student Student{name='Stefan'}
+    }
+
+    @Test
+    public void left_join(){
+        // will return courses without students as well
+        Query query = em.createQuery("Select c, s from Course c LEFT JOIN c.students s");
+        List<Object[]> resultList = query.getResultList();
+        logger.info("Result list size  -> {}",resultList.size());
+        for (Object[] result : resultList) {
+            logger.info("Course {}, Student {}", result[0], result[1]);
+        }
+//        Result list size  -> 5
+//        Course Course{name='hibernate'}, Student Student{name='Stefan'}
+//        Course Course{name='hibernate'}, Student Student{name='Petar'}
+//        Course Course{name='hibernate'}, Student Student{name='Ivan'}
+//        Course Course{name='JPA'}, Student null
+//        Course Course{name='JDBC'}, Student Student{name='Stefan'}
+    }
+
+    @Test
+    public void cross_join(){
+        // will return every rows from first table crossed with every row from second table
+        Query query = em.createQuery("Select c, s from Course c, Student s");
+        List<Object[]> resultList = query.getResultList();
+        logger.info("Result list size  -> {}",resultList.size());
+        for (Object[] result : resultList) {
+            logger.info("Course {}, Student {}", result[0], result[1]);
+        }
+//        Result list size  -> 9
+//        Course Course{name='hibernate'}, Student Student{name='Stefan'}
+//        Course Course{name='hibernate'}, Student Student{name='Petar'}
+//        Course Course{name='hibernate'}, Student Student{name='Ivan'}
+//        Course Course{name='JPA'}, Student Student{name='Stefan'}
+//        Course Course{name='JPA'}, Student Student{name='Petar'}
+//        Course Course{name='JPA'}, Student Student{name='Ivan'}
+//        Course Course{name='JDBC'}, Student Student{name='Stefan'}
+//        Course Course{name='JDBC'}, Student Student{name='Petar'}
+//        Course Course{name='JDBC'}, Student Student{name='Ivan'}
+    }
 
 }

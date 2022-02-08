@@ -152,3 +152,7 @@ Then we have to call them from HibernateApplication one after another.
 Employee - no table created
 A separate table will be created for PartTimeEmployee -> columns: ID, NAME, HOURLY_WAGE
 A separate table will be created for FullTimeEmployee -> columns: ID, NAME, SALARY
+
+#JPQL
+Java Persistence Query Language
+JPQLTest

@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -46,6 +45,15 @@ class JPQLTest {
         List<Course> resultList = query.getResultList();
         logger.info("Select c From Course c Where name like '%100 steps%'-> {}",resultList);
         //[Course{name='Web in 100 steps updated'}, Course{name='Java 100 steps'}]
+    }
+
+    @Test
+    void jpdl_courses_without_students() {
+        // we are referring to the Entities not the tables behind them
+        TypedQuery<Course> query = em.createQuery("Select c from Course c where  c.students is empty ", Course.class);
+        List<Course> resultList = query.getResultList();
+        logger.info("Select c from Course c where  c.students is empty -> {}",resultList);
+        //[Course{name='JPA'}]
     }
 
 }

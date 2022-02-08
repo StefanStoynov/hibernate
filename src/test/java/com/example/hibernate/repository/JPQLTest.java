@@ -56,4 +56,31 @@ class JPQLTest {
         //[Course{name='JPA'}]
     }
 
+    @Test
+    void jpdl_courses_with_atleast_2_students() {
+        // we are referring to the Entities not the tables behind them
+        TypedQuery<Course> query = em.createQuery("Select c from Course c where size(c.students) >= 2 ", Course.class);
+        List<Course> resultList = query.getResultList();
+        logger.info("Select c from Course c where  c.students is empty -> {}",resultList);
+        //[Course{name='hibernate'}]
+    }
+
+    @Test
+    void jpdl_courses_order_by_students_asc() {
+        // we are referring to the Entities not the tables behind them
+        TypedQuery<Course> query = em.createQuery("Select c from Course c order by size(c.students)", Course.class);
+        List<Course> resultList = query.getResultList();
+        logger.info("Select c from Course c where  c.students is empty -> {}",resultList);
+        //[Course{name='JPA'}, Course{name='JDBC'}, Course{name='hibernate'}]
+    }
+
+    @Test
+    void jpdl_courses_order_by_students_desc() {
+        // we are referring to the Entities not the tables behind them
+        TypedQuery<Course> query = em.createQuery("Select c from Course c order by size(c.students) desc", Course.class);
+        List<Course> resultList = query.getResultList();
+        logger.info("Select c from Course c where  c.students is empty -> {}",resultList);
+        //[Course{name='hibernate'}, Course{name='JDBC'}, Course{name='JPA'}]
+    }
+
 }

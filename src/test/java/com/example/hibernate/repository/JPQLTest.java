@@ -2,6 +2,7 @@ package com.example.hibernate.repository;
 
 import com.example.hibernate.HibernateApplication;
 import com.example.hibernate.entity.Course;
+import com.example.hibernate.entity.Student;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,11 +58,11 @@ class JPQLTest {
     }
 
     @Test
-    void jpdl_courses_with_atleast_2_students() {
+    void jpdl_courses_with_at_least_2_students() {
         // we are referring to the Entities not the tables behind them
         TypedQuery<Course> query = em.createQuery("Select c from Course c where size(c.students) >= 2 ", Course.class);
         List<Course> resultList = query.getResultList();
-        logger.info("Select c from Course c where  c.students is empty -> {}",resultList);
+        logger.info("Select c from Course c where size(c.students) >= 2 -> {}",resultList);
         //[Course{name='hibernate'}]
     }
 
@@ -70,17 +71,31 @@ class JPQLTest {
         // we are referring to the Entities not the tables behind them
         TypedQuery<Course> query = em.createQuery("Select c from Course c order by size(c.students)", Course.class);
         List<Course> resultList = query.getResultList();
-        logger.info("Select c from Course c where  c.students is empty -> {}",resultList);
+        logger.info("Select c from Course c order by size(c.students) -> {}",resultList);
         //[Course{name='JPA'}, Course{name='JDBC'}, Course{name='hibernate'}]
     }
 
     @Test
     void jpdl_courses_order_by_students_desc() {
-        // we are referring to the Entities not the tables behind them
+        //ORDER BY
         TypedQuery<Course> query = em.createQuery("Select c from Course c order by size(c.students) desc", Course.class);
         List<Course> resultList = query.getResultList();
-        logger.info("Select c from Course c where  c.students is empty -> {}",resultList);
+        logger.info("Select c from Course c order by size(c.students) desc -> {}",resultList);
         //[Course{name='hibernate'}, Course{name='JDBC'}, Course{name='JPA'}]
     }
+
+    @Test
+    void jpdl_students_with_passport_in_a_certain_pattern() {
+        //LIKE
+        TypedQuery<Student> query = em.createQuery("Select s from Student s where s.passport.number like '%11%' ", Student.class);
+        List<Student> resultList = query.getResultList();
+        logger.info("Select s from Student s where s.passport.number like '%11%'  -> {}",resultList);
+        //[Student{name='Stefan'}, Student{name='Petar'}, Student{name='Ivan'}]
+    }
+
+    //like
+    //BETWEEN 100 AND 1000
+    //IS NULL
+    //FOR STRINGS upper, lower, trim, length
 
 }

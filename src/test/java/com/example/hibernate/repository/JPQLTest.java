@@ -85,6 +85,10 @@ class JPQLTest {
         //[Course{name='hibernate'}, Course{name='JDBC'}, Course{name='JPA'}]
     }
 
+    //like
+    //BETWEEN 100 AND 1000
+    //IS NULL
+    //FOR STRINGS upper, lower, trim, length
     @Test
     void jpdl_students_with_passport_in_a_certain_pattern() {
         //LIKE
@@ -93,11 +97,6 @@ class JPQLTest {
         logger.info("Select s from Student s where s.passport.number like '%11%'  -> {}",resultList);
         //[Student{name='Stefan'}, Student{name='Petar'}, Student{name='Ivan'}]
     }
-
-    //like
-    //BETWEEN 100 AND 1000
-    //IS NULL
-    //FOR STRINGS upper, lower, trim, length
 
     //JOIN -> Select c, s, from Course c JOIN c students s
     //LEFT JOIN -> Select c, s, from Course c LEFT JOIN c students s; will return courses without students as well

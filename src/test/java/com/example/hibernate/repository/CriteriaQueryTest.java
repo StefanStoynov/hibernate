@@ -12,10 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.criteria.*;
 import java.util.List;
 
 @SpringBootTest(classes = HibernateApplication.class)
@@ -98,6 +95,54 @@ class CriteriaQueryTest {
         List resultList = query.getResultList();
         logger.info("Typed query -> {}",resultList);
         //Typed query -> [Course{name='JPA'}]
+    }
+
+    @Test
+    void join() {
+        //Steps to create following query
+        //"Select c from Course c join c.students"
+
+        //1. Use Criteria Builder to create a Criteria Query returning the expected result object
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Course> cq = cb.createQuery(Course.class);
+
+        //2. Define roots for tables which are involved in the query
+        Root<Course> courseRoot = cq.from(Course.class);
+
+        //3. Define predicates etc using Criteria Builder
+        Join<Object, Object> studentsJoin = courseRoot.join("students");
+
+        //4. Add Predicates etc to the Criteria Query
+
+        //5. Build the TypedQuery using the entity manager and criteria query
+        TypedQuery query = em.createQuery(cq.select(courseRoot));
+        List resultList = query.getResultList();
+        logger.info("Typed query -> {}",resultList);
+        //Typed query -> [Course{name='hibernate'}, Course{name='hibernate'}, Course{name='hibernate'}, Course{name='JDBC'}]
+    }
+
+    @Test
+    void left_join() {
+        //Steps to create following query
+        //"Select c from Course c left join c.students"
+
+        //1. Use Criteria Builder to create a Criteria Query returning the expected result object
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Course> cq = cb.createQuery(Course.class);
+
+        //2. Define roots for tables which are involved in the query
+        Root<Course> courseRoot = cq.from(Course.class);
+
+        //3. Define predicates etc using Criteria Builder
+        Join<Object, Object> studentsJoin = courseRoot.join("students", JoinType.LEFT);
+
+        //4. Add Predicates etc to the Criteria Query
+
+        //5. Build the TypedQuery using the entity manager and criteria query
+        TypedQuery query = em.createQuery(cq.select(courseRoot));
+        List resultList = query.getResultList();
+        logger.info("Typed query -> {}",resultList);
+        //Typed query -> [Course{name='hibernate'}, Course{name='hibernate'}, Course{name='hibernate'}, Course{name='JPA'}, Course{name='JDBC'}]
     }
 
 

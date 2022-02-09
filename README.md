@@ -156,3 +156,5 @@ A separate table will be created for FullTimeEmployee -> columns: ID, NAME, SALA
 #JPQL
 Java Persistence Query Language
 JPQLTest
+
+#Criteria Query

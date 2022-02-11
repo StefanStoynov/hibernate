@@ -158,3 +158,32 @@ Java Persistence Query Language
 JPQLTest
 
 #Criteria Query
+CriteriaQueryTest
+
+#Transaction management
+ACID Properties
+A Atomicity - all changes success or revert
+C Consistency - any transaction should leave the system into a consistent state 
+I Isolation - how changes in one transaction are visible into other transactions
+D Durability - once transaction is completed the data should be persisted
+
+Isolation Concepts:
+ - Dirty Read - when two transactions running in parallel. Another transaction is reading the value before a previous 
+transaction is completed.
+ - Non Repeatable Read - when read same value twice during the transaction I get different values 
+(some transactions has updated the value)
+ - Phantom Read - at different times I am getting different number of rows in the same transaction
+
+Isolation Levels:
+ - Read Uncommitted - does not solve any of the Isolation Concepts.
+ - Read Committed - solve only Dirty Read, but the performance is very good and the data is in descent consistency
+ - Repeatable Read - solve Dirty Read and Non Repeatable Read.
+ - Serializable - solve all the Isolation Concepts, but we will have very poor performance. Every transaction is 
+waiting previous to be completed
+
+Difference between JPA @Transactional and Spring @Transactional
+ - JPA - manages transactions over a single database /Import javax.transaction/. Isolation level could be set up for ALL 
+Transactions into application.properties example - spring.jpa.properties.hibernate.connection.isolation= from 1-4 see
+documentation.
+ - Spring - manages transactions across multiple things (databases, mq) /Import org.springframework.transaction/. It can
+be decided what is isolation level(Example - @Transactional(isolation=READ_COMMITTED)) for every class or method

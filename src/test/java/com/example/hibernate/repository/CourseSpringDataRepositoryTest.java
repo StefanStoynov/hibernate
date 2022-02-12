@@ -31,4 +31,18 @@ class CourseSpringDataRepositoryTest {
         Optional<Course> courseOptional = repository.findById(10007L);
         Assertions.assertFalse(courseOptional.isPresent());
     }
+
+    @Test
+    public void playingAroundWithSpringDataRepository(){
+        Course course = new Course("Java Web");
+        //create a new course into DB
+        repository.save(course);
+        course.setName("Java Web updated");
+        //update the course. We use same save method
+        repository.save(course);
+        //find all courses
+        logger.info("Courses: {}", repository.findAll());
+        logger.info("Courses count is: {}", repository.count());
+    }
+
 }

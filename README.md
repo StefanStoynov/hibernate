@@ -190,3 +190,6 @@ be decided what is isolation level(Example - @Transactional(isolation=READ_COMMI
 
 #Spring Data JPA
 CourseSpringDataRepository
+CourseSpringDataRepositoryTest
+
+

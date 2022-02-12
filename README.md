@@ -195,4 +195,8 @@ CourseSpringDataRepositoryTest
 #Caching
 Hibernate:
  - First level cache - it is into a boundary of a single transaction
- - Second level cache - common for multiple users
+CourseRepositoryTest
+ - Second level cache - common for multiple users/ needs a configuration - you need to tel hibernate
+what data will not be changed between multiple transactions, what is the data which is common between multiple
+users? Need to add dependency into pom.xml - <artifactId>hibernate-ehcache</artifactId>
+We need to update application.properties

@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.List;
-//will expose the data into url: http://localhost:8080/courses
+//will expose the data into url: http://localhost:8080/courses  not recommended for production
 //need a dependency: spring-boot-starter-data-rest
 @RepositoryRestResource(path="courses")
 public interface CourseSpringDataRepository extends JpaRepository<Course, Long> {

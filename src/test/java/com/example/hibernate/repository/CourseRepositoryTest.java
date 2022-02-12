@@ -35,6 +35,19 @@ class CourseRepositoryTest {
     }
 
     @Test
+    @Transactional
+    void findById_first_level_cache() {
+        Course course = repository.findById(10002L);
+        logger.info("First course retrieved {}", course);
+        Course course1 = repository.findById(10002L);
+        // the course is retrieved without shutting a query to the DB but @Transactional is a must,
+        // they need to be in a single transaction
+        logger.info("First course retrieved again {}", course1);
+        assertEquals("JPA", course.getName());
+        assertEquals("JPA", course1.getName());
+    }
+
+    @Test
     @DirtiesContext
     //@DirtiesContext is used to repair the data after the test is done
     void deleteById() {

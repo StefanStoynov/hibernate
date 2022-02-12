@@ -192,4 +192,7 @@ be decided what is isolation level(Example - @Transactional(isolation=READ_COMMI
 CourseSpringDataRepository
 CourseSpringDataRepositoryTest
 
-
+#Caching
+Hibernate:
+ - First level cache - it is into a boundary of a single transaction
+ - Second level cache - common for multiple users

@@ -1,6 +1,11 @@
 insert into course(id, name) values (10001, 'hibernate' );
 insert into course(id, name) values (10002, 'JPA' );
 insert into course(id, name) values (10003, 'JDBC' );
+insert into course(id, name) values (10004, 'Dummy1' );
+insert into course(id, name) values (10005, 'Dummy2' );
+insert into course(id, name) values (10006, 'Dummy3' );
+insert into course(id, name) values (10007, 'Dummy4' );
+insert into course(id, name) values (10008, 'Dummy5' );
 
 insert into passport(id, number) values (30001,'A11111');
 insert into passport(id, number) values (30002,'A11222');

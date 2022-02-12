@@ -8,7 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Sort;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest(classes = HibernateApplication.class)
@@ -43,6 +46,18 @@ class CourseSpringDataRepositoryTest {
         //find all courses
         logger.info("Courses: {}", repository.findAll());
         logger.info("Courses count is: {}", repository.count());
+    }
+
+    @Test
+    public void sort(){
+        //sort by name desc
+        logger.info("Courses sorted by name desc: {}", repository.findAll(Sort.by(Sort.Direction.DESC,"name")));
+        //sort by name asc
+        logger.info("Courses sorted by name asc: {}", repository.findAll(Sort.by(Sort.Direction.ASC,"name")));
+        //sort by name and id. If we have two courses with the same name JPA will sort them by id
+        logger.info("Courses sorted by name and id: {}", repository.findAll(Sort.by(Sort.Direction.ASC,"name")
+                                                                   .and(Sort.by(Sort.Direction.ASC,"id"))));
+
     }
 
 }

@@ -78,4 +78,9 @@ class CourseSpringDataRepositoryTest {
         logger.info("Courses of the second page are: {}", secondPage.getContent());
     }
 
+    @Test
+    public void findUsingName() {
+        logger.info("FindByName: {}", repository.findByName("Dummy1"));
+    }
+
 }

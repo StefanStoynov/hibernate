@@ -186,4 +186,7 @@ Difference between JPA @Transactional and Spring @Transactional
 Transactions into application.properties example - spring.jpa.properties.hibernate.connection.isolation= from 1-4 see
 documentation.
  - Spring - manages transactions across multiple things (databases, mq) /Import org.springframework.transaction/. It can
-be decided what is isolation level(Example - @Transactional(isolation=READ_COMMITTED)) for every class or method
+be decided what is isolation level(Example - @Transactional(isolation=READ_COMMITTED)) for every class or method.
+
+#Spring Data JPA
+CourseSpringDataRepository

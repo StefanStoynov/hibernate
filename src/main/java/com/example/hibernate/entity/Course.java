@@ -1,5 +1,7 @@
 package com.example.hibernate.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,6 +27,8 @@ public class Course {
     private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany(mappedBy = "courses")
+    //@RepositoryRestResource(path="courses") will cause an infinite loop, and we need @JsonIgnore to prevent it
+    @JsonIgnore
     private List<Student> students = new ArrayList<>();
 
     //access modifier is important

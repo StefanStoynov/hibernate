@@ -2,6 +2,7 @@ package com.example.hibernate.repository;
 
 import com.example.hibernate.entity.Course;
 import com.example.hibernate.entity.Review;
+import com.example.hibernate.entity.ReviewRating;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,8 +76,8 @@ public class CourseRepository {
         logger.info("course.getReviews() -> {}", course.getReviews());
 
         //add 2 reviews to it
-        Review review1 = new Review("5", "Great Stuff");
-        Review review2 = new Review("5", "Hatsoff");
+        Review review1 = new Review(ReviewRating.FIVE, "Great Stuff");
+        Review review2 = new Review(ReviewRating.FIVE, "Hatsoff");
 
         //setting the relationship
         //save the Review into Course

@@ -68,7 +68,6 @@ class StudentRepositoryTest {
         student.setAddress(new Address("line1 example", "line2 example", "New York"));
         entityManager.flush();
         logger.info("Student -> {}", student);
-        logger.info("Student passport -> {}", student.getPassport());
     }
 
     @Test

@@ -200,3 +200,13 @@ CourseRepositoryTest
 what data will not be changed between multiple transactions, what is the data which is common between multiple
 users? Need to add dependency into pom.xml - <artifactId>hibernate-ehcache</artifactId>
 We need to update application.properties
+
+#Soft Delete
+see Course.java 
+
+@SQLDelete(sql="update course set is_deleted = true where id = ?") - when deleting a course @SQLDelete will set 
+is_deleted to true, but course will be in DB
+@Where(clause="is_deleted=false") - will return only objects where is_deleted = false/ don't retrieve inactive courses
+
+if we use native query @Where annotation will not work - will return every row including rows with is_deleted=true, 
+so we need to rework the query like: Select * From course Where is_deleted = 0;

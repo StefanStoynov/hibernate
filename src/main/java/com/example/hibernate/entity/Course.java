@@ -40,6 +40,11 @@ public class Course {
 
     private boolean isDeleted;
 
+    @PreRemove
+    private void preRemove(){
+        this.isDeleted = true;
+    }
+
     //access modifier is important
     protected Course() {
     }

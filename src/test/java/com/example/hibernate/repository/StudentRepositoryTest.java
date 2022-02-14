@@ -1,6 +1,7 @@
 package com.example.hibernate.repository;
 
 import com.example.hibernate.HibernateApplication;
+import com.example.hibernate.entity.Address;
 import com.example.hibernate.entity.Course;
 import com.example.hibernate.entity.Passport;
 import com.example.hibernate.entity.Student;
@@ -55,6 +56,17 @@ class StudentRepositoryTest {
     @Transactional
     void saveStudentWithPassport() {
         Student student = entityManager.find(Student.class, 20002L);
+        logger.info("Student -> {}", student);
+        logger.info("Student passport -> {}", student.getPassport());
+    }
+
+    @Test
+    //@Transactional is needed because lazy fetch of passport
+    @Transactional
+    void setAddressDetails() {
+        Student student = entityManager.find(Student.class, 20002L);
+        student.setAddress(new Address("line1 example", "line2 example", "New York"));
+        entityManager.flush();
         logger.info("Student -> {}", student);
         logger.info("Student passport -> {}", student.getPassport());
     }

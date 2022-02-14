@@ -13,6 +13,10 @@ public class Student {
 
     @Column(nullable = false)
     private String name;
+
+    @Embedded
+    private Address address;
+
     //retrieves only student without passport join
     @OneToOne(fetch = FetchType.LAZY)
     private Passport passport;
@@ -23,6 +27,7 @@ public class Student {
                inverseJoinColumns = @JoinColumn(name = "COURSE_ID")
               )
     private List<Course> courses = new ArrayList<>();
+
 
     public Student() {
     }
@@ -43,6 +48,10 @@ public class Student {
         return passport;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
     public List<Course> getCourses() {
         return Collections.unmodifiableList(courses);
     }
@@ -57,6 +66,10 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public void setPassport(Passport passport) {

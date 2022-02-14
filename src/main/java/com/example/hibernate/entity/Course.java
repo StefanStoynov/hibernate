@@ -1,6 +1,8 @@
 package com.example.hibernate.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,6 +19,10 @@ import java.util.List;
         @NamedQuery(name = "query_get_courses_where", query = "Select c From Course c Where name like '%100 steps%'")
 })
 @Cacheable
+//when deleting a course @SQLDelete will set is_deleted to true, but course will be in DB
+@SQLDelete(sql="update course set is_deleted = true where id = ?")
+//will return only objects where is_deleted = false/ don't retrieve inactive courses
+@Where(clause="is_deleted=false")
 public class Course {
     @Id
     @GeneratedValue
@@ -31,6 +37,8 @@ public class Course {
     //@RepositoryRestResource(path="courses") will cause an infinite loop, and we need @JsonIgnore to prevent it
     @JsonIgnore
     private List<Student> students = new ArrayList<>();
+
+    private boolean isDeleted;
 
     //access modifier is important
     protected Course() {

@@ -1,6 +1,6 @@
-insert into course(id, name) values (10001, 'hibernate' );
-insert into course(id, name) values (10002, 'JPA' );
-insert into course(id, name) values (10003, 'JDBC' );
+insert into course(id, name, is_deleted) values (10001, 'hibernate', false);
+insert into course(id, name, is_deleted) values (10002, 'JPA', false);
+insert into course(id, name, is_deleted) values (10003, 'JDBC', false);
 -- insert into course(id, name) values (10004, 'Dummy1' );
 -- insert into course(id, name) values (10005, 'Dummy2' );
 -- insert into course(id, name) values (10006, 'Dummy3' );

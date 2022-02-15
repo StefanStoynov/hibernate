@@ -210,3 +210,6 @@ is_deleted to true, but course will be in DB
 
 if we use native query @Where annotation will not work - will return every row including rows with is_deleted=true, 
 so we need to rework the query like: Select * From course Where is_deleted = 0;
+
+#N+1 Problem
+see PerformanceTuningTest

@@ -16,6 +16,7 @@ import java.util.List;
 //for MULTIPLE named queries
 @NamedQueries(value = {
         @NamedQuery(name = "query_get_all_courses", query = "Select c From Course c"),
+        @NamedQuery(name = "query_get_all_courses_with_join_fetch", query = "Select c From Course c JOIN FETCH c.students s"),
         @NamedQuery(name = "query_get_courses_where", query = "Select c From Course c Where name like '%100 steps%'")
 })
 @Cacheable

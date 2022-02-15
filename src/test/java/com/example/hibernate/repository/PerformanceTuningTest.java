@@ -27,7 +27,7 @@ class PerformanceTuningTest {
 
 
     @Autowired
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Test
     @Transactional

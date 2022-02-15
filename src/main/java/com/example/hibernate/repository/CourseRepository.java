@@ -20,7 +20,7 @@ public class CourseRepository {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    EntityManager em;
+    private EntityManager em;
 
     //findByID(Long id)
     //save(Course course) -> insert or update

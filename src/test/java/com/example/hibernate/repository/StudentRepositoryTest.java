@@ -20,10 +20,10 @@ class StudentRepositoryTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    StudentRepository repository;
+    private StudentRepository repository;
 
     @Autowired
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Test
     //@Transactional creates a Persistence Context where all objects are stored

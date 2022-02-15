@@ -23,7 +23,7 @@ class CourseSpringDataRepositoryTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    CourseSpringDataRepository repository;
+    private CourseSpringDataRepository repository;
 
     @Test
     public void findById_CoursePresent() {

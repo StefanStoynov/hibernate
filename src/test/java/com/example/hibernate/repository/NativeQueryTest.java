@@ -20,7 +20,7 @@ class NativeQueryTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    EntityManager em;
+    private EntityManager em;
 
     @Test
     void native_query() {

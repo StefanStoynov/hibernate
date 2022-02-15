@@ -18,7 +18,7 @@ public class Review {
     @ManyToOne
     private Course course;
 
-    public Review() {
+    protected Review() {
     }
 
     public Review(ReviewRating rating, String description) {

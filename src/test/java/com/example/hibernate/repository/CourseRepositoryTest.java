@@ -23,10 +23,10 @@ class CourseRepositoryTest {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    CourseRepository repository;
+    private CourseRepository repository;
 
     @Autowired
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Test
     void findById() {

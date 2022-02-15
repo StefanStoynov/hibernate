@@ -20,7 +20,7 @@ public class EmployeeRepository {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    EntityManager em;
+    private EntityManager em;
 
     public void insert(Employee employee){
         this.em.persist(employee);

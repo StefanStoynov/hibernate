@@ -8,7 +8,7 @@ public class FullTimeEmployee extends Employee{
 
     private BigDecimal salary;
 
-    public FullTimeEmployee() {
+    protected FullTimeEmployee() {
     }
 
     public FullTimeEmployee(String name, BigDecimal salary) {

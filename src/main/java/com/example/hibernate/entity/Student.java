@@ -29,7 +29,7 @@ public class Student {
     private List<Course> courses = new ArrayList<>();
 
 
-    public Student() {
+    protected Student() {
     }
 
     public Student(String name) {
